@@ -47,9 +47,12 @@ export default function JournalPage() {
   })
 
   const deleteMutation = useMutation({
-    mutationFn: (id: string) => supabase.from('trades').delete().eq('id', id).then(() => {}),
-    onSuccess: invalidate,
-  })
+  mutationFn: async (id: string) => {
+    const { error } = await supabase.from('trades').delete().eq('id', id)
+    if (error) throw error
+  },
+  onSuccess: invalidate,
+})
 
   return (
     <div className="p-5 md:p-8 space-y-4">
