@@ -19,7 +19,7 @@ export default function RegisterPage() {
     const { error } = await supabase.auth.signUp({
       email, password,
       options: {
-  emailRedirectTo: `${window.location.origin}/api/auth/callback`,
+  emailRedirectTo: 'https://tradeedge-journal2.vercel.app/api/auth/callback',
 },
     })
     if (error) { setError(error.message); setLoading(false); return }
